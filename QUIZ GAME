@@ -1,0 +1,91 @@
+class Quiz:
+    def __init__(self, questions):
+        self.questions = questions
+        self.score = 0
+
+    def display_question(self, question):
+        print(question['question'])
+        for index, option in enumerate(question['options'], start=1):
+            print(f"{index}. {option}")
+
+    def get_user_input(self, question):
+        while True:
+            user_input = input("Enter your choice (1, 2, 3, ...): ")
+            if user_input.isdigit() and 1 <= int(user_input) <= len(question['options']):
+                return int(user_input)
+            else:
+                print("Invalid input. Please enter a number corresponding to your choice.")
+
+    def check_answer(self, question, user_answer):
+        correct_answer = question['answer']
+        if user_answer == correct_answer:
+            print("Correct!")
+            self.score += 1
+        else:
+            print("Incorrect. The correct answer is:", question['options'][correct_answer - 1])
+
+    def start_quiz(self):
+        for question in self.questions:
+            self.display_question(question)
+            user_answer = self.get_user_input(question)
+            self.check_answer(question, user_answer)
+            print()  # Add a newline for better readability
+        print("Quiz completed! Your final score is:", self.score)
+
+
+if __name__ == "__main__":
+    questions = [
+        {
+            'question': "What is the capital of France?",
+            'options': ["London", "Paris", "Berlin"],
+            'answer': 2
+        },
+        {
+            'question': "Which is the largest planet in our solar system?",
+            'options': ["Jupiter", "Mars", "Earth"],
+            'answer': 1
+        },
+        {
+            'question': "Who wrote 'To Kill a Mockingbird'?",
+            'options': ["Harper Lee", "Stephen King", "J.K. Rowling"],
+            'answer': 1
+        }, 
+        {
+        'question': "What is 2 + 2?",
+        'options': ["4", "3", "5"],
+        'answer': 1
+       },
+      {
+        'question': "Which is the tallest animal?",
+        'options': ["Elephant", "Giraffe", "Horse"],
+        'answer': 2
+      },
+      {
+        'question': "What color is a ripe banana?",
+        'options': ["Red", "Yellow", "Green"],
+        'answer': 2
+      },
+      {
+        'question': "How many legs does a spider have?",
+        'options': ["4", "6", "8"],
+        'answer': 3
+      },
+      {
+        'question': "Who painted the Mona Lisa?",
+        'options': ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh"],
+        'answer': 1
+      },  
+      {
+        'question': "Which of the following is a programming language?",
+        'options': ["Banana", "Python", "Carrot"],
+        'answer': 2
+    },  
+     {
+        'question': "What does the 'print' function do in Python?",
+        'options': ["Play music", "Display text", "Make a phone call"],
+        'answer': 2
+    },
+    ]
+    
+    quiz = Quiz(questions)
+    quiz.start_quiz()   
